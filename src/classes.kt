@@ -25,7 +25,7 @@ class AnotherCustomer(val id: Int, var name: String, val yearOfBirth: Int) {
             field = value
         }
 
-    fun customerAsString(): String {
+    fun customerAsString(): String   {
         return "Id: $id - Name: $name"
     }
 }
