@@ -17,4 +17,8 @@ fun main(args: Array<String>) {
 
     // Single param lambdas can use the word `it` to denote the param passed in
     println(unaryOperation(4) { it * 6 })
+
+    // Implementing functional interfaces inline
+    val runKotlinRun = Runnable { println("it runs!") }
+    runKotlinRun.run()
 }
