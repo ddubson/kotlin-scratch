@@ -1,3 +1,5 @@
+package functions
+
 fun hello(): Unit {
     println("Hello!")
 }
