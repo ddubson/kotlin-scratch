@@ -2,13 +2,15 @@ package functions
 
 class Request(val method: String, val query: String, val contentType: String)
 
-class Response(var contents: String, var status: Status)
+class Response(var contents: String, var status: Status) {
+    operator fun invoke(status: Status.() -> Unit) {
+
+    }
+}
 
 class Status(var code: Int, var description: String)
 
-fun response(response: Response.() -> Unit) {}
-
-fun status(status: Status.()->Unit) {}
+fun status(status: Status.() -> Unit) {}
 
 class RouteHandler(val request: Request, val response: Response) {
     var executeNext = false
@@ -27,10 +29,8 @@ fun main(args: Array<String>) {
         }
 
         response {
-            status {
-                code = 404
-                description = "Not Found"
-            }
+            code = 404
+            description = "Not Found"
         }
     }
 }
