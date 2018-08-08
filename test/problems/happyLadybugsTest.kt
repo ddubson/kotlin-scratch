@@ -35,7 +35,7 @@ internal class HappyLadybugsTest : Spek({
             }
         }
 
-        describe("and there are colors that are alone in the string") {
+        describe("and consists of all single unique colors") {
             val inputString = "YXX"
 
             it("should return 'NO'") {
@@ -43,8 +43,16 @@ internal class HappyLadybugsTest : Spek({
             }
         }
 
-        describe("and there are colors that are all satisfied") {
+        describe("and consists of even number of clustered colors") {
             val inputString = "YYXX"
+
+            it("should return 'YES'") {
+                assertThat(happyLadybugs(inputString)).isEqualTo(Answer.YES)
+            }
+        }
+
+        describe("and consists of odd number of clustered colors") {
+            val inputString = "YYYXX"
 
             it("should return 'YES'") {
                 assertThat(happyLadybugs(inputString)).isEqualTo(Answer.YES)
