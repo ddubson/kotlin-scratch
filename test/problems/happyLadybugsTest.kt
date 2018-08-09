@@ -11,19 +11,25 @@ object Answer {
 }
 
 fun happyLadybugs(input: String): String {
-    // Count number of instances of a letter
-    // If all counts are even, then return yes
+    if(input.isEmpty()) {
+        return Answer.NO
+    }
 
-    countOccurrences(input).forEach {
-        if(it.value % 2 != 0) {
+    var memoryChar = '!'
+    input.forEachIndexed { index, c ->
+        if(index + 1 == input.length) {
+            return@forEachIndexed
+        }
+
+        if(c == input[index + 1] || memoryChar == c) {
+            memoryChar = c
+        } else {
             return Answer.NO
         }
     }
 
     return Answer.YES
 }
-
-fun countOccurrences(input: String) = input.toList().asSequence().groupingBy { it }.eachCount()
 
 internal class HappyLadybugsTest : Spek({
     describe("when there are no empty spaces") {
@@ -56,6 +62,14 @@ internal class HappyLadybugsTest : Spek({
 
             it("should return 'YES'") {
                 assertThat(happyLadybugs(inputString)).isEqualTo(Answer.YES)
+            }
+        }
+
+        describe("and consists of odd number of non-clustered colors") {
+            val inputString = "YYXYXX"
+
+            it("should return 'NO'") {
+                assertThat(happyLadybugs(inputString)).isEqualTo(Answer.NO)
             }
         }
     }
