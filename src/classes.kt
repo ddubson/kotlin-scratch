@@ -1,7 +1,5 @@
 import java.util.*
 
-class Customer
-
 class AnotherCustomer(val id: Int, var name: String, val yearOfBirth: Int) {
     init {
         name = name.toUpperCase()
