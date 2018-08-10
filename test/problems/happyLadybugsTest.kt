@@ -16,13 +16,19 @@ fun happyLadybugs(input: String): String {
         return Answer.NO
     }
 
+    val sortedInput = input.asSequence().sorted().joinToString("")
+
     var memoryChar = '!'
-    input.forEachIndexed { index, c ->
-        if(index + 1 == input.length) {
+    sortedInput.forEachIndexed { index, c ->
+        if(index + 1 == sortedInput.length) {
+            if(memoryChar != c) {
+                return Answer.NO
+            }
+
             return@forEachIndexed
         }
 
-        if(c == input[index + 1] || memoryChar == c) {
+        if(c == sortedInput[index + 1] || memoryChar == c) {
             memoryChar = c
         } else {
             return Answer.NO
@@ -68,4 +74,5 @@ internal class HappyLadybugsTest : Spek({
         }
 
     }
+
 })
