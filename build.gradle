@@ -37,5 +37,6 @@ compileTestKotlin { kotlinOptions { jvmTarget = "1.8" }}
 
 sourceSets {
     main.kotlin.srcDirs += 'src/'
-    test.kotlin.srcDirs += 'test/'
+    test.kotlin.srcDirs += ['test/']
+    test.resources.srcDirs += ['test/resources']
 }
