@@ -24,9 +24,9 @@ fun happyLadybugs(input: String): String {
 
         if (mutableInput[index + 1] != c) {
             // seek forward to underscore
-            val posOfNextUnderscore = findNextUnderscore(input)
+            val posOfNextUnderscore = findNextUnderscore(input, index + 1)
             if (posOfNextUnderscore == -1) {
-                if(prev == c) {
+                if (prev == c) {
                     continue
                 } else {
                     return Answer.NO
@@ -38,7 +38,7 @@ fun happyLadybugs(input: String): String {
                 mutableInput[posOfNextUnderscore] = nextChar
             }
 
-            val posOfNextChar = findNextChar(input.substring(index + 1), c)
+            val posOfNextChar = findNextChar(input, index + 1, c)
 
             if (posOfNextChar == -1 && prev != c) {
                 return Answer.NO
@@ -57,9 +57,9 @@ fun happyLadybugs(input: String): String {
     return if (checkIfHappy(mutableInput)) "YES" else "NO"
 }
 
-fun findNextUnderscore(input: String): Int = input.indexOf('_')
+fun findNextUnderscore(input: String, startIndex: Int): Int = input.indexOf('_', startIndex)
 
-fun findNextChar(input: String, c: Char): Int = input.indexOf(c)
+fun findNextChar(input: String, startIndex: Int, c: Char): Int = input.indexOf(c, startIndex)
 
 fun checkIfHappy(input: MutableList<Char>): Boolean {
     var memoryChar = '!'
