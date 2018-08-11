@@ -30,7 +30,14 @@ internal class HappyLadybugsTest : Spek({
     describe("when there are empty spaces") {
         val testCases = mapOf(
                 "RXY_" to Answer.NO,
-                "X_X" to Answer.YES
+                "X_X" to Answer.YES,
+                "X_" to Answer.NO,
+                "XYYX_Y" to Answer.YES,
+                "XY_X_Y" to Answer.YES,
+                "RBY_YBR" to Answer.YES,
+                "X_Y__X" to Answer.NO,
+                "B_RRBR" to Answer.YES,
+                "__" to Answer.YES
         )
 
         testCases.forEach { input, expectedAnswer ->

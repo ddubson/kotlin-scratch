@@ -13,8 +13,13 @@ fun happyLadybugs(input: String): String {
     var prev = '!'
     val mutableInput = input.asSequence().toMutableList()
 
-    for ((index, c) in input.withIndex()) {
+    for ((index, c) in mutableInput.withIndex()) {
         if (c == '_') {
+            // put at end of input
+            val lastChar = mutableInput.last()
+            mutableInput[index] = lastChar
+            mutableInput[mutableInput.size-1] = '_'
+            prev = lastChar
             continue
         }
 
@@ -24,7 +29,16 @@ fun happyLadybugs(input: String): String {
 
         if (mutableInput[index + 1] != c) {
             // seek forward to underscore
-            val posOfNextUnderscore = findNextUnderscore(input, index + 1)
+            val posOfNextChar = findNextChar(mutableInput, index + 1, c)
+            if (posOfNextChar == -1) {
+                if(prev == c) {
+                    continue
+                } else {
+                    return Answer.NO
+                }
+            }
+
+            val posOfNextUnderscore = findNextUnderscore(mutableInput, index + 1)
             if (posOfNextUnderscore == -1) {
                 if (prev == c) {
                     continue
@@ -36,14 +50,7 @@ fun happyLadybugs(input: String): String {
                 val nextChar = mutableInput[index + 1]
                 mutableInput[index + 1] = '_'
                 mutableInput[posOfNextUnderscore] = nextChar
-            }
 
-            val posOfNextChar = findNextChar(input, index + 1, c)
-
-            if (posOfNextChar == -1 && prev != c) {
-                return Answer.NO
-            } else {
-                // swap underscore with next char
                 mutableInput[index + 1] = mutableInput[posOfNextChar]
                 mutableInput[posOfNextChar] = '_'
             }
@@ -57,9 +64,25 @@ fun happyLadybugs(input: String): String {
     return if (checkIfHappy(mutableInput)) "YES" else "NO"
 }
 
-fun findNextUnderscore(input: String, startIndex: Int): Int = input.indexOf('_', startIndex)
+fun findNextUnderscore(input: MutableList<Char>, startIndex: Int): Int {
+    input.forEachIndexed { index, c ->
+        if(c == '_' && index >= startIndex) {
+            return index
+        }
+    }
 
-fun findNextChar(input: String, startIndex: Int, c: Char): Int = input.indexOf(c, startIndex)
+    return -1
+}
+
+fun findNextChar(input: MutableList<Char>, startIndex: Int, toFind: Char): Int {
+    input.forEachIndexed { index, c ->
+        if(c == toFind && index >= startIndex) {
+            return index
+        }
+    }
+
+    return -1
+}
 
 fun checkIfHappy(input: MutableList<Char>): Boolean {
     var memoryChar = '!'
