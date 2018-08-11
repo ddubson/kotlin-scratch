@@ -15,7 +15,11 @@ internal class HappyLadybugsTest : Spek({
                 "YYYXX" to Answer.YES,
                 "YYXYXX" to Answer.NO,
                 "XYXYXYX" to Answer.NO,
-                "RBXYXB" to Answer.NO
+                "RBXYXB" to Answer.NO,
+                "RRGGBBXY" to Answer.NO,
+                "RRGGBBXX" to Answer.YES,
+                "GR" to Answer.NO,
+                "G" to Answer.NO
         )
 
         testCases.forEach { input, expectedAnswer ->
@@ -37,7 +41,13 @@ internal class HappyLadybugsTest : Spek({
                 "RBY_YBR" to Answer.YES,
                 "X_Y__X" to Answer.NO,
                 "B_RRBR" to Answer.YES,
-                "__" to Answer.YES
+                "__" to Answer.YES,
+                "R_R_R" to Answer.YES,
+                "_R_G_" to Answer.NO,
+                "_GR_" to Answer.NO,
+                "_FWYSSENEDBO_KSEVUAB_WZ_GASASVEVS_O_NSVBYFNADE_WWVSBKAE_F_VAS_F_AAAEWBE_WEAEOAYV" to Answer.NO,
+                "ZBF_MIFUXJNQGQRFZVRQUFFFFNGFIBJ_XZVIRFGMJRJFVMNJMF" to Answer.YES,
+                "YFCA_NXMGJYYGCMMGGGXYNAMFNJJX_" to Answer.YES
         )
 
         testCases.forEach { input, expectedAnswer ->
